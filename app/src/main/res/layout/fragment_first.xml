@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FirstFragment">
+
+    <TextView
+        android:id="@+id/textview_simple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:text="@string/simple_command_label"
+        app:layout_constraintBottom_toTopOf="@id/textview_first"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/textview_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:editable="false"
+        android:lines="3"
+        android:maxLines="3"
+        android:text="@string/hello_first_fragment"
+        app:layout_constraintBottom_toTopOf="@id/space_above_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_simple" />
+
+    <Space
+        android:id="@+id/space_above_button"
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_first"
+         />
+
+    <Button
+        android:id="@+id/button_mes1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textAllCaps="false"
+        android:text="Mes 1"
+        app:layout_constraintTop_toBottomOf="@id/space_above_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_mes2"
+        app:layout_constraintBottom_toTopOf="@id/button_input"
+         />
+
+    <Button
+        android:id="@+id/button_mes2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textAllCaps="false"
+        android:text="Mes 2"
+        app:layout_constraintTop_toBottomOf="@id/space_above_button"
+        app:layout_constraintStart_toEndOf="@id/button_mes1"
+        app:layout_constraintEnd_toStartOf="@id/button_undo"
+        app:layout_constraintBottom_toTopOf="@id/button_cut"
+         />
+
+    <Button
+        android:id="@+id/button_undo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textAllCaps="false"
+        android:text="Undo"
+        app:layout_constraintTop_toBottomOf="@id/space_above_button"
+        app:layout_constraintStart_toEndOf="@id/button_mes2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonz_paste"
+         />
+
+    <Button
+        android:id="@+id/button_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textAllCaps="false"
+        android:text="Input Text"
+        app:layout_constraintTop_toBottomOf="@id/button_mes1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_cut"
+        app:layout_constraintBottom_toTopOf="@id/space_below_button"
+        />
+
+    <Button
+        android:id="@+id/button_cut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textAllCaps="false"
+        android:text="Cut Text"
+        app:layout_constraintTop_toBottomOf="@id/button_mes2"
+        app:layout_constraintStart_toEndOf="@id/button_input"
+        app:layout_constraintEnd_toStartOf="@id/buttonz_paste"
+        app:layout_constraintBottom_toTopOf="@id/space_below_button"
+        />
+
+    <Button
+        android:id="@+id/buttonz_paste"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textAllCaps="false"
+        android:enabled="false"
+        android:text="Paste"
+        app:layout_constraintTop_toBottomOf="@id/button_undo"
+        app:layout_constraintStart_toEndOf="@id/button_cut"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/space_below_button"
+        />
+
+    <Space
+        android:id="@+id/space_below_button"
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_cut"
+        />
+
+    <Button
+        android:id="@+id/button_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="@string/next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/space_below_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
