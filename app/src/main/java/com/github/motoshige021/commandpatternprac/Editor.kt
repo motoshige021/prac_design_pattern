@@ -1,11 +1,10 @@
 package com.github.motoshige021.commandpatternprac
 
 import android.graphics.Color
-import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-class Editor {
+class Editor() {
     companion object {
         val MAX_LINE = 3
     }
@@ -16,18 +15,25 @@ class Editor {
     val updated : LiveData<Int> = _updated
     private val _cutText = MutableLiveData<String>("")
     var cutText : LiveData<String> = _cutText
+    private val _pasted = MutableLiveData<Int>(0)
+    val pasted : LiveData<Int> = _pasted
 
     fun getText(line: Int): String ? {
         if (line >= MAX_LINE) { return null }
         return texts[line]
     }
 
-    fun setText(in_text: String, line: Int, in_textColor: Color) {
+    fun setText(in_text: String, line: Int, in_textColor: Color,
+                isPaste : Boolean = false) {
         if (line >= MAX_LINE) { return }
         textColor = Color.valueOf(in_textColor.toArgb())
         texts[line] = in_text
         val value = _updated.value!!
         _updated.value = value + 1
+        if (isPaste) {
+            val value = _pasted.value!!
+            _pasted.value = value + 1
+        }
     }
 
     fun cutSelection(line: Int): String ?{

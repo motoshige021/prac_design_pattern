@@ -1,9 +1,14 @@
 package com.github.motoshige021.commandpatternprac
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 class AppViewModel : ViewModel() {
     var editor: Editor = Editor()
+
+    private val _historyChanged = MutableLiveData<Int>(0)
+    val historyChanged: LiveData<Int> = _historyChanged
 
     var historyButtonCommand = arrayListOf<ButtonCommand>()
 
@@ -12,6 +17,7 @@ class AppViewModel : ViewModel() {
         if (buttonCommand.execute()) {
             val copyCommand = buttonCommand.copy()
             historyButtonCommand.add(copyCommand)
+            notifyHIstoryChange(historyButtonCommand.size)
         }
     }
 
@@ -27,6 +33,10 @@ class AppViewModel : ViewModel() {
         for (i in textArray.size until Editor.MAX_LINE) {
             editor.setText("", i, buttonCommand.backupColor)
         }
+        notifyHIstoryChange(historyButtonCommand.size)
         return true
+    }
+    fun notifyHIstoryChange(historySize: Int) {
+        _historyChanged.value = historySize
     }
 }

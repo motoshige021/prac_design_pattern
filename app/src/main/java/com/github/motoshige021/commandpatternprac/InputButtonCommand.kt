@@ -1,7 +1,6 @@
 package com.github.motoshige021.commandpatternprac
 
 import android.graphics.Color
-import android.widget.EditText
 
 class InputButtonCommand(in_appModel: AppViewModel, in_editor: Editor)
         : ButtonCommand(in_appModel, in_editor) {

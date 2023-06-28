@@ -21,13 +21,15 @@ class FirstFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private lateinit  var appViewModel : AppViewModel
+    private lateinit var appViewModel : AppViewModel
+    private lateinit var appMediator : AppMediator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         appViewModel = ViewModelProvider(requireActivity()).get(AppViewModel::class.java)
+        appMediator = AppMediator(appViewModel, this)
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -39,7 +41,9 @@ class FirstFragment : Fragment() {
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
-        appViewModel.editor.updated.observe(this) {
+        // Mediatorにobserve処理を移動
+        //appViewModel.editor.updated.observe(this) {
+        appMediator.setUpdateProc{
             binding.textviewFirst.setTextColor(appViewModel.editor.textColor.toArgb())
             binding.textviewFirst.setText(appViewModel.editor.getBackup())
         }
@@ -66,18 +70,26 @@ class FirstFragment : Fragment() {
             CutButtonCOmmand(appViewModel, appViewModel.editor), appViewModel)
         binding.buttonCut.setOnClickListener(cutButtonClickListener)
 
-        appViewModel.editor.cutText.observe(this) {
+        // Mediatorにobserve処理を移動
+        //appViewModel.editor.cutText.observe(this) {
+        appMediator.setCutButtonProc {
             binding.buttonzPaste.isEnabled = true
         }
         var pastoButtonClickListener = ButtonClickListener(
-            PastoButtonCommand(appViewModel, appViewModel.editor, binding.buttonzPaste),
-            appViewModel)
+            PastoButtonCommand(appViewModel, appViewModel.editor), appViewModel)
         binding.buttonzPaste.setOnClickListener(pastoButtonClickListener)
         binding.buttonzPaste.isEnabled =false
+        appMediator.setPasteButtonProc {
+            binding.buttonzPaste.isEnabled =false
+        }
 
         var undoButtonClickListener = ButtonClickListener(
             UndoButtonCommand(appViewModel, appViewModel.editor), appViewModel)
         binding.buttonUndo.setOnClickListener(undoButtonClickListener)
+
+        appMediator.setUndoButtonProc { historySize: Int ->
+            binding.buttonUndo.isEnabled = historySize != 0
+        }
     }
 
     override fun onDestroyView() {
