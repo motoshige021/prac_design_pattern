@@ -21,7 +21,7 @@ class InputButtonCommand(in_appModel: AppViewModel, in_editor: Editor)
         return true
     }
 
-    override fun copy(): ButtonCommand {
+    override fun clone(): ButtonCommand {
         var inputCommand = InputButtonCommand(this.appModel, this.editor)
         inputCommand.backupEdit = this.backupEdit
         inputCommand.backupColor = this.backupColor

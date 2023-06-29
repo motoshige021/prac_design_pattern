@@ -15,7 +15,7 @@ class AppViewModel : ViewModel() {
     fun executeCommand(buttonCommand: ButtonCommand) {
         // 履歴に積むButtonCommandと履歴に積まないのがあり、execute()の戻り値で判断
         if (buttonCommand.execute()) {
-            val copyCommand = buttonCommand.copy()
+            val copyCommand = buttonCommand.clone()
             historyButtonCommand.add(copyCommand)
             notifyHIstoryChange(historyButtonCommand.size)
         }

@@ -2,7 +2,8 @@ package com.github.motoshige021.commandpatternprac
 
 import android.graphics.Color
 
-abstract class ButtonCommand(in_appModel: AppViewModel, in_editor: Editor) {
+abstract class ButtonCommand(in_appModel: AppViewModel, in_editor: Editor)
+    : ProtoTypeButtonCommand{
     protected lateinit var appModel: AppViewModel
     protected lateinit var editor: Editor
     // コマンド履歴 （コマンド・オブジェクトのスタック）に、 その時点で
@@ -16,8 +17,7 @@ abstract class ButtonCommand(in_appModel: AppViewModel, in_editor: Editor) {
     }
 
     abstract fun execute() : Boolean
-
-    abstract fun copy() : ButtonCommand
+    override abstract  fun clone(): ButtonCommand
 
     protected fun backup() {
         backupEdit = editor.getBackup()
