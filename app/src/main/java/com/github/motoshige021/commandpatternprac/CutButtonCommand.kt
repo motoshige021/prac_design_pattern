@@ -14,8 +14,12 @@ class CutButtonCOmmand (in_appModel: AppViewModel, in_editor: Editor)
 
     override fun clone(): ButtonCommand {
         var buttonCommand = CutButtonCOmmand(appModel, editor)
-        buttonCommand.backupEdit = this.backupEdit
-        buttonCommand.backupColor = this.backupColor
+        // EditorMemeto
+        //buttonCommand.backupEdit = this.backupEdit
+        //buttonCommand.backupColor = this.backupColor
+        this.backupMemeto?.let {
+            buttonCommand.backupMemeto =  it.clone()
+        }
         return buttonCommand
     }
 }

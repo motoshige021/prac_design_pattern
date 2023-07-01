@@ -18,8 +18,12 @@ class PastoButtonCommand (in_appModel: AppViewModel, in_editor: Editor)
 
     override fun clone(): ButtonCommand {
         var buttonCommand = PastoButtonCommand(appModel, editor)
-        buttonCommand.backupEdit = this.backupEdit
-        buttonCommand.backupColor = this.backupColor
+        // EditorMemetoに移動
+        //buttonCommand.backupEdit = this.backupEdit
+        //buttonCommand.backupColor = this.backupColor
+        this.backupMemeto?.let {
+            buttonCommand.backupMemeto = it.clone()
+        }
         return buttonCommand
     }
 }

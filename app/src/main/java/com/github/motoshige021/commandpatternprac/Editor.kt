@@ -50,7 +50,7 @@ class Editor() {
         return text
     }
 
-    fun getBackup(): String {
+    fun getBackupText(): String {
         var text = ""
         texts.forEach { str->
             str?.let {
@@ -60,5 +60,21 @@ class Editor() {
         }
         text = text.dropLast(1)
         return text
+    }
+
+    fun getBackupMemeto() : EditorMemeto {
+        return EditorMemeto(this, this.getBackupText(), textColor)
+    }
+
+    fun setBackupData(backupText: String, backupColor: Color) {
+        this.textColor = backupColor
+        val textArray = backupText.split('\n')
+        for (i in 0 until textArray.size) {
+            var text = textArray[i]
+            this.setText(text, i, backupColor)
+        }
+        for (i in textArray.size until Editor.MAX_LINE) {
+            this.setText("", i, backupColor)
+        }
     }
 }

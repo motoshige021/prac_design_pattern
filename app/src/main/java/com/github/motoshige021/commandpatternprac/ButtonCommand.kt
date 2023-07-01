@@ -8,8 +8,11 @@ abstract class ButtonCommand(in_appModel: AppViewModel, in_editor: Editor)
     protected lateinit var editor: Editor
     // コマンド履歴 （コマンド・オブジェクトのスタック）に、 その時点で
     // エディターの状態の バックアップ用コピーとともに置かれます
-    var backupEdit: String = ""
-    var backupColor : Color = Color.valueOf(Color.BLACK)
+    // Memento パターンで、状態のスナップショットの作成、保存する
+    // EditorMemetoに移動
+    //var backupEdit: String = ""
+    //var backupColor : Color = Color.valueOf(Color.BLACK)
+    protected var backupMemeto:EditorMemeto ? = null
 
     init {
         appModel = in_appModel
@@ -20,7 +23,12 @@ abstract class ButtonCommand(in_appModel: AppViewModel, in_editor: Editor)
     override abstract  fun clone(): ButtonCommand
 
     protected fun backup() {
-        backupEdit = editor.getBackup()
-        backupColor = editor.textColor
+        backupMemeto = editor.getBackupMemeto()
+    }
+
+    fun restoreEditor() {
+        this.backupMemeto?.let {
+            it.restore()
+        }
     }
 }

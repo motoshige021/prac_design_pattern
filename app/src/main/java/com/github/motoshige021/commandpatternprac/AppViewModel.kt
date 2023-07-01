@@ -25,6 +25,7 @@ class AppViewModel : ViewModel() {
         if (historyButtonCommand.isEmpty()) { return false }
         var historySize = historyButtonCommand.size
         var buttonCommand = historyButtonCommand.removeAt(historySize - 1)
+        /* Editorと EditorMemetoに移動
         val textArray = buttonCommand.backupEdit.split('\n')
         for (i in 0 until textArray.size) {
             var text = textArray[i]
@@ -33,6 +34,8 @@ class AppViewModel : ViewModel() {
         for (i in textArray.size until Editor.MAX_LINE) {
             editor.setText("", i, buttonCommand.backupColor)
         }
+         */
+        buttonCommand.restoreEditor()
         notifyHIstoryChange(historyButtonCommand.size)
         return true
     }

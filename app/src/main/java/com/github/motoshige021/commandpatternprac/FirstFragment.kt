@@ -45,7 +45,7 @@ class FirstFragment : Fragment() {
         //appViewModel.editor.updated.observe(this) {
         appMediator.setUpdateProc{
             binding.textviewFirst.setTextColor(appViewModel.editor.textColor.toArgb())
-            binding.textviewFirst.setText(appViewModel.editor.getBackup())
+            binding.textviewFirst.setText(appViewModel.editor.getBackupText())
         }
 
         var msg1ButtonClickListener =
