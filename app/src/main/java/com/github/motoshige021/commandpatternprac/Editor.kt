@@ -10,7 +10,7 @@ class Editor() {
     }
 
     private var texts = arrayOfNulls<String>(MAX_LINE)
-    var textColor: Color = Color.valueOf(Color.BLACK)
+    private var textColor: Color = Color.valueOf(Color.BLACK)
     private val _updated = MutableLiveData<Int>(0)
     val updated : LiveData<Int> = _updated
     private val _cutText = MutableLiveData<String>("")
@@ -34,6 +34,14 @@ class Editor() {
             val value = _pasted.value!!
             _pasted.value = value + 1
         }
+    }
+
+    fun setTextColor(color: Color) {
+        this.textColor = color
+    }
+
+    fun getTextColor() : Color {
+        return textColor
     }
 
     fun cutSelection(line: Int): String ?{

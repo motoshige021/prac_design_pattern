@@ -44,7 +44,7 @@ class FirstFragment : Fragment() {
         // Mediatorにobserve処理を移動
         //appViewModel.editor.updated.observe(this) {
         appMediator.setUpdateProc{
-            binding.textviewFirst.setTextColor(appViewModel.editor.textColor.toArgb())
+            binding.textviewFirst.setTextColor(appViewModel.editor.getTextColor().toArgb())
             binding.textviewFirst.setText(appViewModel.editor.getBackupText())
         }
 

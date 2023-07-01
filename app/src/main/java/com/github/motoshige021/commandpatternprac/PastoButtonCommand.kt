@@ -11,7 +11,7 @@ class PastoButtonCommand (in_appModel: AppViewModel, in_editor: Editor)
         var line = count % Editor.MAX_LINE
         ++count
         editor.cutText.value ?.let {
-            editor.setText(it, line, editor.textColor, true)
+            editor.setText(it, line, editor.getTextColor(), true)
         }
         return true
     }
