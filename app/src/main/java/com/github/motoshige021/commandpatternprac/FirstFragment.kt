@@ -41,12 +41,13 @@ class FirstFragment : Fragment() {
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
-        // Mediatorにobserve処理を移動
-        //appViewModel.editor.updated.observe(this) {
-        appMediator.setUpdateProc{
-            binding.textviewFirst.setTextColor(appViewModel.editor.getTextColor().toArgb())
-            binding.textviewFirst.setText(appViewModel.editor.getBackupText())
-        }
+
+        appMediator.addUpdateObserver(object: UpdateObserver {
+            override fun update(in_appViewModel: AppViewModel) {
+                binding.textviewFirst.setTextColor(in_appViewModel.editor.getTextColor().toArgb())
+                binding.textviewFirst.setText(in_appViewModel.editor.getBackupText())
+            }
+        });
 
         var msg1ButtonClickListener =
             SimpleButtonClickListener(Mes1ButtonCommandImpl(binding.textviewSimple))

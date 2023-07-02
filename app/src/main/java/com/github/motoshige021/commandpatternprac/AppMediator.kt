@@ -1,6 +1,5 @@
 package com.github.motoshige021.commandpatternprac
 
-import android.widget.Button
 import androidx.fragment.app.Fragment
 
 class AppMediator(in_appViewMode: AppViewModel, in_owner: Fragment) {
@@ -8,14 +7,15 @@ class AppMediator(in_appViewMode: AppViewModel, in_owner: Fragment) {
     private var cutButtonProc: (()->Unit)? = null
     private var undoButtonProc: ((historySize: Int)->Unit)? = null
     private var pasteButonProc: (()->Unit)? = null
-    private var updateProc: ((appViewModel: AppViewModel)->Unit) ? = null
+    private var updateObservers = ArrayList<UpdateObserver>(0)
 
     init {
         appViewMode = in_appViewMode
 
         appViewMode.editor.updated.observe(in_owner) {
-            var _updateProc = updateProc?: return@observe
-            _updateProc(appViewMode)
+            updateObservers.forEach {
+                it.update(appViewMode)
+            }
         }
         appViewMode.editor.cutText.observe(in_owner) {
             var _cutButtonProc = cutButtonProc?: return@observe
@@ -44,7 +44,11 @@ class AppMediator(in_appViewMode: AppViewModel, in_owner: Fragment) {
         pasteButonProc = func
     }
 
-    fun setUpdateProc(func: (appView: AppViewModel)->Unit) {
-        updateProc = func
+    fun addUpdateObserver(updateObserver: UpdateObserver) {
+        updateObservers.add(updateObserver)
+    }
+
+    fun deleteUpdateObserver(updateObserver: UpdateObserver) {
+        updateObservers.remove(updateObserver)
     }
 }
